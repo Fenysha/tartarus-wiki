@@ -10,24 +10,22 @@ const { src = '/placeholder.jpg', alt = 'Документальное изобр
 <style is:global>
   .image-panel {
     margin: 1.5rem 0;
-    padding: 1rem;
-    background: rgba(9, 12, 9, 0.8);
-    border: 1px solid var(--sl-color-border);
-    border-radius: 0;
-    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.25);
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
   }
 
   .image-panel img {
     display: block;
     width: 100%;
-    border-radius: 0;
-    filter: grayscale(0.25) contrast(1.12) sepia(0.15) hue-rotate(30deg);
-    border: 1px solid var(--sl-color-border);
+    filter: grayscale(1) contrast(1.12);
+    border: 0;
   }
 
   .image-panel figcaption {
     margin-top: 0.7rem;
-    color: var(--sl-color-accent);
+    color: var(--sl-color-gray-2);
     font: 700 0.7rem var(--sl-font-mono);
     letter-spacing: 0.08em;
     text-transform: uppercase;

@@ -5,16 +5,18 @@ const checksum = Array.from(documentPath).reduce((sum, character) => (sum + char
 	.toString(16)
 	.padStart(4, '0')
 	.toUpperCase();
+const sectors = Math.max(1, Math.ceil(documentPath.length / 8)).toString().padStart(3, '0');
 ---
 
 <div class="document-command-header">
   <p class="document-command-header__path">
-    <span aria-hidden="true">root@tartarus:~$</span> cd {documentPath}
+    <span aria-hidden="true">root@tartarus:~$</span> cat {documentPath}
   </p>
   <div class="document-command-header__readout" aria-label="Технические сведения о документе">
     <span>NODE: ARCHIVE-01</span>
     <span>MODE: READ_ONLY</span>
     <span>CRC: {checksum}</span>
+    <span>SECTORS: {sectors}</span>
   </div>
   <h1 id="_top">{entry.data.title}</h1>
 </div>

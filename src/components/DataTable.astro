@@ -25,9 +25,8 @@ const { rows = [] } = Astro.props;
     margin: 1.5rem 0;
     border-collapse: collapse;
     overflow: hidden;
-    border: 1px solid var(--sl-color-border);
-    border-radius: 0;
-    background: rgba(8, 11, 8, 0.65);
+    border: 0;
+    background: transparent;
   }
 
   .data-table th,
@@ -38,7 +37,7 @@ const { rows = [] } = Astro.props;
   }
 
   .data-table th {
-    background: rgba(201, 237, 60, 0.08);
+    background: #171717;
     color: var(--sl-color-text-accent);
     letter-spacing: 0.12em;
     text-transform: uppercase;
