@@ -1,9 +1,19 @@
 ---
+type SecurityLevel = 'EKHU' | 'LIMN' | 'SIGMA' | 'THETA' | 'OMEGA' | 'TARTAR';
+type ThreatLevel = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL' | 'UNKNOWN';
+type DocumentStatus = 'OPEN' | 'RESTRICTED' | 'SEALED' | 'CORRUPTED' | 'CLASSIFIED';
+
+interface Props {
+  security?: SecurityLevel;
+  threat?: ThreatLevel;
+  status?: DocumentStatus;
+}
+
 const {
-  security = 'EKHU',
-  threat = 'LOW',
-  status = 'OPEN'
-} = Astro.props;
+  security = 'EKHU' as SecurityLevel,
+  threat = 'LOW' as ThreatLevel,
+  status = 'OPEN' as DocumentStatus
+} = Astro.props as Props;
 
 const securityLevels = {
   EKHU: {
@@ -48,7 +58,9 @@ const statuses = {
   CLASSIFIED: 'Засекречено',
 };
 
-const level = securityLevels[security] ?? securityLevels.EKHU;
+const level = securityLevels[security as SecurityLevel] ?? securityLevels.EKHU;
+
+
 ---
 
 <div class={`doc-header security-${security.toLowerCase()}`}>
@@ -64,12 +76,12 @@ const level = securityLevels[security] ?? securityLevels.EKHU;
 
   <div class="doc-header__item">
     <span class="doc-header__label">THREAT LEVEL</span>
-    <strong>{threats[threat] ?? threat}</strong>
+    <strong>{threats[threat as ThreatLevel] ?? threat}</strong>
   </div>
 
   <div class="doc-header__item">
     <span class="doc-header__label">DOCUMENT STATUS</span>
-    <strong>{statuses[status] ?? status}</strong>
+    <strong>{statuses[status as DocumentStatus] ?? status}</strong>
   </div>
 
   <div class="doc-header__code" aria-hidden="true">

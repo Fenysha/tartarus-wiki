@@ -1,0 +1,1561 @@
+---
+interface Props {
+  duration?: number;
+  node?: string;
+  system?: string;
+  version?: string;
+  skipMemory?: boolean;
+}
+
+const {
+  duration = 6500,
+  node = 'TARTARUS-01',
+  system = 'ASTRA ARCHIVE',
+  version = 'ARCHIVE BUILD 01',
+  skipMemory = true,
+} = Astro.props;
+---
+
+<div
+  class="boot"
+  data-duration={duration}
+  data-skip-memory={skipMemory}
+  aria-label="Инициализация архива"
+  role="dialog"
+>
+  <div class="boot__noise"></div>
+  <div class="boot__scanlines"></div>
+
+  <div class="boot__terminal">
+
+    <!-- HEADER -->
+    <header class="boot__header">
+      <div class="boot__header-left">
+        <span class="boot__accent">TARTARUS</span>
+        <span class="boot__separator">//</span>
+        <span>ASTRA TERMINAL</span>
+      </div>
+
+      <div class="boot__header-right">
+        <span>NODE</span>
+        <strong>{node}</strong>
+      </div>
+    </header>
+
+    <!-- IDENTITY -->
+    <section class="boot__identity">
+
+      <div class="boot__identity-visual">
+
+        <div class="boot__logo-stage">
+
+          <pre
+            class="boot__logo boot__logo--one is-active"
+            aria-hidden="true"
+          >
+             /\
+            /  \
+           / /\ \
+          / /  \ \
+         /_/    \_\
+        /  /\  /\  \
+       /__/  \/  \__\
+          </pre>
+
+          <pre
+            class="boot__logo boot__logo--two"
+            aria-hidden="true"
+          >
+       ┌───────────────┐
+       │               │
+       │    A R C H    │
+       │       T P     │
+       │    A R C H    │
+       │               │
+       └───────────────┘
+          </pre>
+
+          <pre
+            class="boot__logo boot__logo--three"
+            aria-hidden="true"
+          >
+             ╱╲
+            ╱██╲
+           ╱████╲
+          ╱██████╲
+         ╱██╱╲╲██╲
+        ╱██╱  ╲╲██╲
+       ╱██╱    ╲╲██╲
+          TARTARUS
+          </pre>
+
+          <div class="boot__logo-grid" aria-hidden="true"></div>
+
+        </div>
+
+      </div>
+
+      <div class="boot__identity-info">
+
+        <div class="boot__identity-title">
+          {system}
+        </div>
+
+        <div class="boot__identity-subtitle">
+          {version}
+        </div>
+
+        <div class="boot__identity-rule"></div>
+
+        <div class="boot__identity-status">
+          DOCUMENTATION ARCHIVE
+        </div>
+
+        <div class="boot__identity-status">
+          INITIALIZATION PROTOCOL
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TELEMETRY -->
+    <section class="boot__telemetry">
+
+      <div class="telemetry-box">
+        <span>CPU</span>
+        <strong data-cpu>--.-%</strong>
+      </div>
+
+      <div class="telemetry-box">
+        <span>MEM</span>
+        <strong data-mem>---- MB</strong>
+      </div>
+
+      <div class="telemetry-box">
+        <span>INDEX</span>
+        <strong data-index>--.--%</strong>
+      </div>
+
+      <div class="telemetry-box">
+        <span>UPLINK</span>
+        <strong data-ping>--- ms</strong>
+      </div>
+
+      <div class="telemetry-box">
+        <span>SECTORS</span>
+        <strong data-sectors>-----</strong>
+      </div>
+
+      <div class="telemetry-box">
+        <span>CRC</span>
+        <strong data-crc>----</strong>
+      </div>
+
+      <div class="telemetry-box">
+        <span>THREADS</span>
+        <strong data-threads>--</strong>
+      </div>
+
+      <div class="telemetry-box">
+        <span>QUEUE</span>
+        <strong data-queue>----</strong>
+      </div>
+
+    </section>
+
+    <!-- CONSOLE -->
+    <section class="boot__console">
+
+      <div class="boot__console-header">
+        <span>SYSTEM LOG</span>
+        <span data-log-count>00 EVENTS</span>
+      </div>
+
+      <div
+        class="boot__log"
+        data-log
+        aria-live="polite"
+      ></div>
+
+      <div class="boot__cursor-line">
+        <span class="boot__prompt">root@tartarus:~$</span>
+        <span data-command>_</span>
+        <span class="boot__cursor">█</span>
+      </div>
+
+    </section>
+
+    <!-- PROGRESS -->
+    <section class="boot__progress">
+
+      <div class="boot__progress-label">
+        <span>ARCHIVE INITIALIZATION</span>
+        <strong data-progress>0%</strong>
+      </div>
+
+      <div class="boot__progress-track">
+        <span data-progress-bar></span>
+      </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="boot__footer">
+
+      <div class="boot__footer-status">
+        <span class="boot__online"></span>
+        SYSTEM ONLINE
+      </div>
+
+      <button type="button" data-skip>
+        [ ESC ] SKIP INITIALIZATION
+      </button>
+
+    </footer>
+
+  </div>
+</div>
+
+<script>
+  const boot =
+    document.querySelector<HTMLElement>('.boot');
+
+  if (boot) {
+    const runBootSequence = () => {
+
+      const duration =
+        Number(boot.dataset.duration) || 6500;
+
+      const skipMemory =
+        boot.dataset.skipMemory === 'true';
+
+      const output =
+        boot.querySelector<HTMLElement>(
+          '[data-log]'
+        );
+
+      const command =
+        boot.querySelector<HTMLElement>(
+          '[data-command]'
+        );
+
+      const progress =
+        boot.querySelector<HTMLElement>(
+          '[data-progress]'
+        );
+
+      const progressBar =
+        boot.querySelector<HTMLElement>(
+          '[data-progress-bar]'
+        );
+
+      const logCount =
+        boot.querySelector<HTMLElement>(
+          '[data-log-count]'
+        );
+
+      const cpu =
+        boot.querySelector<HTMLElement>(
+          '[data-cpu]'
+        );
+
+      const mem =
+        boot.querySelector<HTMLElement>(
+          '[data-mem]'
+        );
+
+      const index =
+        boot.querySelector<HTMLElement>(
+          '[data-index]'
+        );
+
+      const ping =
+        boot.querySelector<HTMLElement>(
+          '[data-ping]'
+        );
+
+      const sectors =
+        boot.querySelector<HTMLElement>(
+          '[data-sectors]'
+        );
+
+      const crc =
+        boot.querySelector<HTMLElement>(
+          '[data-crc]'
+        );
+
+      const threads =
+        boot.querySelector<HTMLElement>(
+          '[data-threads]'
+        );
+
+      const queue =
+        boot.querySelector<HTMLElement>(
+          '[data-queue]'
+        );
+
+      const skipButton =
+        boot.querySelector<HTMLButtonElement>(
+          '[data-skip]'
+        );
+
+      const logoFrames =
+        Array.from(
+          boot.querySelectorAll<HTMLElement>(
+            '.boot__logo'
+          )
+        );
+
+      const commands = [
+        [
+          'bios POST',
+          'hardware layer .............. OK',
+        ],
+        [
+          'kernel init',
+          'runtime core ............... OK',
+        ],
+        [
+          'mount /archive',
+          'archive volume ............. MOUNTED',
+        ],
+        [
+          'fsck /archive',
+          'filesystem ................. CLEAN',
+        ],
+        [
+          'load astra',
+          'runtime environment ........ READY',
+        ],
+        [
+          'index --scan',
+          'document index ............. FOUND',
+        ],
+        [
+          'hash --verify',
+          'integrity database ........ VERIFIED',
+        ],
+        [
+          'networkctl status',
+          'uplink ..................... ESTABLISHED',
+        ],
+        [
+          'access --probe',
+          'public read interface ...... AVAILABLE',
+        ],
+        [
+          'cache --warm',
+          'document cache ............. PRIMED',
+        ],
+        [
+          'sidebar --mount',
+          'navigation tree ............ MOUNTED',
+        ],
+        [
+          'assets --verify',
+          'static resources ........... VALID',
+        ],
+        [
+          'archive --prepare',
+          'documentation runtime ..... READY',
+        ],
+        [
+          'archive --open',
+          'terminal session ........... ACCEPTED',
+        ],
+      ];
+
+      let finished = false;
+      let eventCounter = 0;
+      let currentLogo = 0;
+      let startTime = performance.now();
+
+      const timeoutIds: number[] = [];
+
+      let telemetryInterval:
+        number | undefined;
+
+      let logoInterval:
+        number | undefined;
+
+      const schedule = (
+        callback: () => void,
+        delay: number
+      ) => {
+        const timeout =
+          window.setTimeout(
+            callback,
+            delay
+          );
+
+        timeoutIds.push(timeout);
+
+        return timeout;
+      };
+
+      const random = (
+        min: number,
+        max: number
+      ) =>
+        Math.random() *
+          (max - min) +
+        min;
+
+      const cleanup = () => {
+        timeoutIds.forEach(
+          (timeout) => {
+            window.clearTimeout(
+              timeout
+            );
+          }
+        );
+
+        timeoutIds.length = 0;
+
+        if (
+          telemetryInterval !==
+          undefined
+        ) {
+          window.clearInterval(
+            telemetryInterval
+          );
+        }
+
+        if (
+          logoInterval !==
+          undefined
+        ) {
+          window.clearInterval(
+            logoInterval
+          );
+        }
+      };
+
+      const finish = () => {
+        if (finished) return;
+
+        finished = true;
+
+        cleanup();
+
+        boot.classList.add(
+          'boot--complete'
+        );
+
+        if (skipMemory) {
+          try {
+            sessionStorage.setItem(
+              'tartarus-boot-complete',
+              '1'
+            );
+          } catch {
+            // Storage unavailable.
+          }
+        }
+
+        window.setTimeout(() => {
+          boot.remove();
+        }, 1100);
+      };
+
+      const wasAlreadyShown =
+        (): boolean => {
+          if (!skipMemory) {
+            return false;
+          }
+
+          try {
+            return (
+              sessionStorage.getItem(
+                'tartarus-boot-complete'
+              ) === '1'
+            );
+          } catch {
+            return false;
+          }
+        };
+
+      if (wasAlreadyShown()) {
+        boot.remove();
+      } else {
+
+        const pushLog = (
+          input: string,
+          result: string
+        ) => {
+          if (!output) return;
+
+          const line =
+            document.createElement(
+              'div'
+            );
+
+          line.className =
+            'boot__log-line';
+
+          const time =
+            new Date().toLocaleTimeString(
+              'en-GB',
+              {
+                hour12: false,
+              }
+            );
+
+          line.innerHTML = `
+            <span class="boot__log-time">
+              [${time}]
+            </span>
+
+            <span class="boot__log-command">
+              ${input}
+            </span>
+
+            <span class="boot__log-result">
+              ${result}
+            </span>
+          `;
+
+          output.appendChild(line);
+
+          while (
+            output.children.length >
+            8
+          ) {
+            output.removeChild(
+              output.firstChild as Child
+            );
+          }
+
+          eventCounter++;
+
+          if (logCount) {
+            logCount.textContent =
+              `${eventCounter
+                .toString()
+                .padStart(
+                  2,
+                  '0'
+                )} EVENTS`;
+          }
+        };
+
+        /*
+         * Initial event.
+         */
+        pushLog(
+          'boot',
+          'TARTARUS ARCHIVE INITIALIZING'
+        );
+
+        /*
+         * Console command sequence.
+         */
+        commands.forEach(
+          (
+            entry,
+            commandIndex
+          ) => {
+
+            const delay =
+              200 +
+              (
+                duration *
+                0.72
+              ) /
+                commands.length *
+                commandIndex;
+
+            schedule(() => {
+              if (finished) return;
+
+              if (command) {
+                command.textContent =
+                  entry[0];
+              }
+
+              schedule(() => {
+                if (finished) return;
+
+                pushLog(
+                  entry[0],
+                  entry[1]
+                );
+
+              }, 130);
+
+            }, delay);
+
+          }
+        );
+
+        /*
+         * Telemetry.
+         */
+        telemetryInterval =
+          window.setInterval(() => {
+
+            if (finished) return;
+
+            if (cpu) {
+              cpu.textContent =
+                `${random(
+                  12,
+                  76
+                ).toFixed(1)}%`;
+            }
+
+            if (mem) {
+              mem.textContent =
+                `${Math.round(
+                  random(
+                    780,
+                    4096
+                  )
+                )} MB`;
+            }
+
+            if (index) {
+              index.textContent =
+                `${random(
+                  35,
+                  100
+                ).toFixed(2)}%`;
+            }
+
+            if (ping) {
+              ping.textContent =
+                `${Math.round(
+                  random(
+                    12,
+                    82
+                  )
+                )} ms`;
+            }
+
+            if (sectors) {
+              sectors.textContent =
+                Math.round(
+                  random(
+                    1000,
+                    99999
+                  )
+                )
+                  .toString()
+                  .padStart(
+                    5,
+                    '0'
+                  );
+            }
+
+            if (crc) {
+              crc.textContent =
+                Math.floor(
+                  random(
+                    0x1000,
+                    0xffff
+                  )
+                )
+                  .toString(16)
+                  .toUpperCase()
+                  .padStart(
+                    4,
+                    '0'
+                  );
+            }
+
+            if (threads) {
+              threads.textContent =
+                Math.round(
+                  random(
+                    4,
+                    32
+                  )
+                ).toString();
+            }
+
+            if (queue) {
+              queue.textContent =
+                Math.round(
+                  random(
+                    0,
+                    128
+                  )
+                )
+                  .toString()
+                  .padStart(
+                    4,
+                    '0'
+                  );
+            }
+
+          }, 180);
+
+        /*
+         * ASCII logo animation.
+         */
+        if (logoFrames.length > 0) {
+
+          logoInterval =
+            window.setInterval(() => {
+
+              if (finished) return;
+
+              logoFrames.forEach(
+                (
+                  frame,
+                  frameIndex
+                ) => {
+
+                  frame.classList.toggle(
+                    'is-active',
+                    frameIndex ===
+                      currentLogo
+                  );
+
+                }
+              );
+
+              currentLogo =
+                (
+                  currentLogo + 1
+                ) %
+                logoFrames.length;
+
+            }, 900);
+
+        }
+
+        /*
+         * Initial progress animation.
+         */
+        const animateProgress = (
+          time: number
+        ) => {
+
+          if (finished) return;
+
+          const elapsed =
+            time - startTime;
+
+          const value =
+            Math.min(
+              100,
+              Math.round(
+                (
+                  elapsed /
+                  duration
+                ) * 100
+              )
+            );
+
+          if (progress) {
+            progress.textContent =
+              `${value}%`;
+          }
+
+          if (progressBar) {
+            progressBar.style.width =
+              `${value}%`;
+          }
+
+          if (value < 100) {
+            requestAnimationFrame(
+              animateProgress
+            );
+          }
+
+        };
+
+        requestAnimationFrame(
+          animateProgress
+        );
+
+        /*
+         * Final command.
+         */
+        schedule(() => {
+
+          if (finished) return;
+
+          pushLog(
+            'archive --open',
+            'WELCOME TO TARTARUS'
+          );
+
+          if (command) {
+            command.textContent =
+              'session ready';
+
+            command.classList.add(
+              'boot__command--ready'
+            );
+          }
+
+        }, Math.max(
+          0,
+          duration - 700
+        ));
+
+        /*
+         * Automatic completion.
+         */
+        schedule(
+          finish,
+          duration
+        );
+
+        /*
+         * Keyboard skipping.
+         */
+        const keyboardHandler = (
+          event: KeyboardEvent
+        ) => {
+
+          if (
+            event.key === 'Escape' ||
+            event.key === 'Enter' ||
+            event.code === 'Space'
+          ) {
+            event.preventDefault();
+            finish();
+          }
+
+        };
+
+        window.addEventListener(
+          'keydown',
+          keyboardHandler
+        );
+
+        skipButton?.addEventListener(
+          'click',
+          finish
+        );
+
+        /*
+         * Make cleanup happen if the page
+         * is unloaded during boot.
+         */
+        window.addEventListener(
+          'beforeunload',
+          () => {
+            cleanup();
+
+            window.removeEventListener(
+              'keydown',
+              keyboardHandler
+            );
+          },
+          {
+            once: true,
+          }
+        );
+
+      }
+    };
+
+    runBootSequence();
+  }
+</script>
+
+<style>
+  .boot {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 1.5rem;
+
+    overflow: hidden;
+
+    background:
+      radial-gradient(
+        circle at center,
+        #151515 0%,
+        #0b0b0b 45%,
+        #050505 100%
+      );
+
+    color: var(--sl-color-text);
+
+    font-family: var(--sl-font-mono);
+
+    opacity: 1;
+    transform: scale(1);
+
+    transition:
+      opacity 650ms ease,
+      transform 900ms
+        cubic-bezier(
+          0.77,
+          0,
+          0.18,
+          1
+        );
+  }
+
+  .boot--complete {
+    opacity: 0;
+    transform: scale(1.035);
+
+    pointer-events: none;
+  }
+
+  .boot__noise,
+  .boot__scanlines {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+  }
+
+  .boot__noise {
+    opacity: 0.035;
+
+    background-image:
+      radial-gradient(
+        rgba(255, 255, 255, 0.6) 1px,
+        transparent 1px
+      );
+
+    background-size:
+      4px 4px;
+  }
+
+  .boot__scanlines {
+    opacity: 0.025;
+
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 3px,
+        rgba(255, 255, 255, 0.3) 4px
+      );
+  }
+
+  .boot__terminal {
+    position: relative;
+
+    width: min(
+      980px,
+      100%
+    );
+
+    border-top:
+      1px solid
+      var(--sl-color-gray-2);
+
+    border-bottom:
+      1px solid
+      var(--sl-color-gray-2);
+  }
+
+  .boot__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0.55rem 0;
+
+    border-bottom:
+      1px solid
+      var(--sl-color-gray-2);
+
+    color:
+      var(--sl-color-gray-3);
+
+    font-size: 0.55rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+  }
+
+  .boot__header-left,
+  .boot__header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .boot__accent {
+    color:
+      var(--sl-color-text-accent);
+  }
+
+  .boot__separator {
+    opacity: 0.5;
+  }
+
+  .boot__header-right strong {
+    color:
+      var(--sl-color-text-accent);
+  }
+
+  .boot__identity {
+    display: grid;
+
+    grid-template-columns:
+      minmax(300px, 1.2fr)
+      minmax(240px, 0.8fr);
+
+    align-items: center;
+
+    min-height: 270px;
+
+    border-bottom:
+      1px solid
+      var(--sl-color-gray-2);
+  }
+
+  .boot__identity-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 270px;
+
+    overflow: hidden;
+  }
+
+  .boot__logo-stage {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 250px;
+  }
+
+  .boot__logo {
+    position: absolute;
+
+    margin: 0;
+
+    color:
+      var(--sl-color-text-accent);
+
+    font-family:
+      var(--sl-font-mono);
+
+    font-size:
+      clamp(
+        0.52rem,
+        1.25vw,
+        0.85rem
+      );
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transform:
+      scale(0.85)
+      rotate(-8deg);
+
+    filter: blur(3px);
+
+    transition:
+      opacity 500ms ease,
+      transform 900ms
+        cubic-bezier(
+          0.2,
+          0.8,
+          0.2,
+          1
+        ),
+      filter 500ms ease;
+  }
+
+  .boot__logo--three {
+    transform:
+      scale(0.85)
+      rotate(8deg);
+  }
+
+  .boot__logo.is-active {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      rotate(0);
+
+    filter: blur(0);
+  }
+
+  .boot__logo-grid {
+    position: absolute;
+    inset: 18% 10%;
+
+    opacity: 0.07;
+
+    background:
+      linear-gradient(
+        var(--sl-color-text-accent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        var(--sl-color-text-accent) 1px,
+        transparent 1px
+      );
+
+    background-size:
+      24px 24px;
+
+    mask-image:
+      radial-gradient(
+        ellipse,
+        black 20%,
+        transparent 72%
+      );
+  }
+
+  .boot__identity-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    padding: 2rem;
+
+    border-left:
+      1px solid
+      var(--sl-color-gray-2);
+  }
+
+  .boot__identity-title {
+    color:
+      var(--sl-color-text);
+
+    font-size: 1rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+  }
+
+  .boot__identity-subtitle {
+    color:
+      var(--sl-color-text-accent);
+
+    font-size: 0.56rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+  }
+
+  .boot__identity-rule {
+    width: 80px;
+    height: 1px;
+
+    margin:
+      1rem 0 0.6rem;
+
+    background:
+      var(--sl-color-gray-2);
+  }
+
+  .boot__identity-status {
+    color:
+      var(--sl-color-gray-3);
+
+    font-size: 0.5rem;
+    font-weight: 700;
+
+    letter-spacing: 0.1em;
+  }
+
+  .boot__telemetry {
+    display: grid;
+
+    grid-template-columns:
+      repeat(8, 1fr);
+
+    border-bottom:
+      1px solid
+      var(--sl-color-gray-2);
+  }
+
+  .telemetry-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+
+    min-height: 58px;
+
+    padding: 0.65rem;
+
+    border-right:
+      1px solid
+      var(--sl-color-gray-2);
+  }
+
+  .telemetry-box:last-child {
+    border-right: 0;
+  }
+
+  .telemetry-box span {
+    color:
+      var(--sl-color-gray-3);
+
+    font-size: 0.44rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+  }
+
+  .telemetry-box strong {
+    color:
+      var(--sl-color-text-accent);
+
+    font-size: 0.62rem;
+    font-weight: 700;
+  }
+
+  .boot__console {
+    min-height: 240px;
+
+    padding: 0.8rem 0;
+
+    border-bottom:
+      1px solid
+      var(--sl-color-gray-2);
+  }
+
+  .boot__console-header {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 0.65rem;
+
+    color:
+      var(--sl-color-gray-3);
+
+    font-size: 0.48rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+  }
+
+  .boot__log {
+    display: flex;
+    flex-direction: column;
+    gap: 0.32rem;
+
+    min-height: 174px;
+
+    overflow: hidden;
+
+    font-size: 0.56rem;
+  }
+
+  .boot__log-line {
+    display: grid;
+
+    grid-template-columns:
+      5rem
+      10rem
+      1fr;
+
+    gap: 0.65rem;
+
+    opacity: 0;
+
+    animation:
+      boot-log-in
+      180ms
+      ease
+      forwards;
+  }
+
+  .boot__log-time {
+    color:
+      var(--sl-color-gray-3);
+  }
+
+  .boot__log-command {
+    color:
+      var(--sl-color-text);
+  }
+
+  .boot__log-result {
+    color:
+      var(--sl-color-text-accent);
+  }
+
+  .boot__cursor-line {
+    display: flex;
+    gap: 0.5rem;
+
+    padding-top: 0.6rem;
+
+    color:
+      var(--sl-color-gray-3);
+
+    font-size: 0.6rem;
+  }
+
+  .boot__prompt {
+    color:
+      var(--sl-color-text-accent);
+  }
+
+  .boot__command {
+    color:
+      var(--sl-color-text);
+  }
+
+  .boot__command--ready {
+    color:
+      var(--sl-color-text-accent);
+  }
+
+  .boot__cursor {
+    color:
+      var(--sl-color-text-accent);
+
+    animation:
+      boot-blink
+      900ms
+      steps(1)
+      infinite;
+  }
+
+  .boot__progress {
+    padding: 0.8rem 0;
+
+    border-bottom:
+      1px solid
+      var(--sl-color-gray-2);
+  }
+
+  .boot__progress-label {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 0.4rem;
+
+    color:
+      var(--sl-color-gray-3);
+
+    font-size: 0.48rem;
+    font-weight: 700;
+
+    letter-spacing: 0.1em;
+  }
+
+  .boot__progress-label strong {
+    color:
+      var(--sl-color-text-accent);
+  }
+
+  .boot__progress-track {
+    width: 100%;
+    height: 2px;
+
+    overflow: hidden;
+
+    background:
+      var(--sl-color-gray-2);
+  }
+
+  .boot__progress-track span {
+    display: block;
+
+    width: 0;
+    height: 100%;
+
+    background:
+      var(--sl-color-text-accent);
+
+    transition:
+      width
+      80ms
+      linear;
+  }
+
+  .boot__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0.6rem 0;
+
+    color:
+      var(--sl-color-gray-3);
+
+    font-size: 0.5rem;
+    font-weight: 700;
+
+    letter-spacing: 0.1em;
+  }
+
+  .boot__footer-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .boot__online {
+    width: 5px;
+    height: 5px;
+
+    background:
+      var(--sl-color-text-accent);
+
+    box-shadow:
+      0 0 6px
+      var(--sl-color-text-accent);
+
+    animation:
+      boot-pulse
+      1200ms
+      ease
+      infinite;
+  }
+
+  .boot__footer button {
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color:
+      var(--sl-color-text-accent);
+
+    font: inherit;
+
+    cursor: pointer;
+  }
+
+  .boot__footer button:hover {
+    text-decoration: underline;
+  }
+
+  @keyframes boot-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes boot-pulse {
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes boot-log-in {
+    from {
+      opacity: 0;
+      transform:
+        translateX(-7px);
+    }
+
+    to {
+      opacity: 1;
+      transform:
+        translateX(0);
+    }
+  }
+
+  @media (max-width: 850px) {
+    .boot__identity {
+      grid-template-columns: 1fr;
+    }
+
+    .boot__identity-info {
+      padding: 1rem 0;
+
+      border-top:
+        1px solid
+        var(--sl-color-gray-2);
+
+      border-left: 0;
+    }
+
+    .boot__telemetry {
+      grid-template-columns:
+        repeat(4, 1fr);
+    }
+
+    .telemetry-box:nth-child(4) {
+      border-right: 0;
+    }
+
+    .telemetry-box:nth-child(-n + 4) {
+      border-bottom:
+        1px solid
+        var(--sl-color-gray-2);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .boot {
+      padding: 1rem;
+    }
+
+    .boot__header-right {
+      display: none;
+    }
+
+    .boot__logo {
+      font-size: 0.48rem;
+    }
+
+    .boot__telemetry {
+      grid-template-columns:
+        repeat(2, 1fr);
+    }
+
+    .telemetry-box:nth-child(2n) {
+      border-right: 0;
+    }
+
+    .telemetry-box:nth-child(4) {
+      border-right: 0;
+    }
+
+    .telemetry-box:nth-child(3),
+    .telemetry-box:nth-child(4) {
+      border-bottom:
+        1px solid
+        var(--sl-color-gray-2);
+    }
+
+    .boot__log-line {
+      grid-template-columns:
+        1fr;
+      gap: 0.05rem;
+    }
+
+    .boot__log-time {
+      display: none;
+    }
+
+    .boot__console {
+      min-height: 220px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .boot,
+    .boot__logo,
+    .boot__log-line,
+    .boot__cursor,
+    .boot__online {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>

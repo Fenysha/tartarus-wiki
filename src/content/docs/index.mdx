@@ -3,66 +3,24 @@ title: Tartarus Wiki
 description: Консольный архив проекта Tartarus
 template: splash
 hero:
-  tagline: Закрытый терминал документации проекта Tartarus. Выберите каталог, чтобы открыть запись архива.
+  tagline: Центральный архив проекта Tartarus.
   image:
     file: ../../assets/tartarus_engine_part.webp
   actions:
-    - text: Открыть архив
-      link: /tartarus-wiki/docs/
-      icon: right-arrow
-    - text: Исходный код
-      link: https://github.com/TeshariEnjoer/tartarus-wiki
-      icon: github
+  - text: Открыть архив
+    link: /tartarus-wiki/docs/
+    icon: right-arrow
+  - text: Исходный код
+    link: https://github.com/TeshariEnjoer/tartarus-wiki
+    icon: github
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import BootSequence from '@components/BootSequence.astro';
 
-<div class="landing-readout" aria-label="Сводка системы">
-  <span><b>PATH</b> /root/archive/index</span>
-  <span><b>NODE</b> TARTARUS-01</span>
-  <span><b>UPLINK</b> STABLE</span>
-  <span><b>ACCESS</b> PUBLIC_READ</span>
-</div>
-
-## О системе
-
-Это консольный архив **Tartarus**: мир, механики, события и служебные записи проекта. Каждая директория содержит отдельный набор документов.
-
-## Каталоги
-
-<CardGrid>
-  <Card title="Документы" icon="book">
-    Основные записи, регламенты и технические протоколы.
-  </Card>
-  <Card title="Разработка" icon="seti:webpack">
-    Материалы для администраторов и разработчиков.
-  </Card>
-  <Card title="Лор" icon="star">
-    История мира, фракции, персонажи и сводки.
-  </Card>
-  <Card title="Изменения" icon="github">
-    Предлагайте правки через Issues и Pull Requests.
-  </Card>
-</CardGrid>
-
-## Внести запись
-
-Порядок публикации данных:
-
-1. Откройте [репозиторий](https://github.com/TeshariEnjoer/tartarus-wiki).
-2. Создайте Pull Request с изменениями.
-3. Обсудите запись в комментариях.
-4. После проверки запись будет опубликована.
-
-Документы хранятся в **Markdown** и публикуются автоматически.
-
-## Структура файловой системы
-
-- **`/docs/`** — основные документы и правила
-- **`/guides/`** — гайды и туториалы  
-- **`/lore/`** — информация о мире и истории
-- **`/events/`** — события и анонсы
-
----
-
-<p class="landing-footer"><span>root@tartarus:~$</span> archive status --all <b>READY</b></p>
+<BootSequence
+  duration={10000}
+  node="TARTARUS-01"
+  system="ASTRA ARCHIVE"
+  version="ARCHIVE BUILD 01"
+  skipMemory={true}
+/>
