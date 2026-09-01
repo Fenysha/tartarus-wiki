@@ -41,10 +41,6 @@ export default defineConfig({
 					items: [{ label: 'Главная', slug: '' }],
 				},
 				{
-					label: 'Игровой сервер',
-					items: [{ label: 'Подключиться к серверу', link: '/tartarus-wiki/join' }],
-				},
-				{
 					label: 'Документы',
 					items: [{ autogenerate: { directory: 'docs' } }],
 				},
