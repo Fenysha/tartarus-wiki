@@ -249,6 +249,13 @@ header.header {
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
 }
+.document-command-header__readout span::before { content: '// '; color: var(--sl-color-accent); }
+.document-command-header h1 { margin: 0; }
+
+.sl-markdown-content h2::before { content: '// '; color: var(--sl-color-accent); }
+.sl-markdown-content a { color: var(--sl-color-accent); text-decoration: underline; text-decoration-color: rgba(201, 237, 60, 0.38); text-underline-offset: 0.18em; }
+.sl-markdown-content a:hover { color: var(--sl-color-accent-high); text-decoration-color: currentColor; }
+.sl-markdown-content strong { color: var(--sl-color-white); }
 
 .sl-markdown-content h2::before { content: '// '; color: var(--sl-color-accent); }
 .sl-markdown-content a { color: var(--sl-color-accent); text-decoration: underline; text-decoration-color: rgba(201, 237, 60, 0.38); text-underline-offset: 0.18em; }

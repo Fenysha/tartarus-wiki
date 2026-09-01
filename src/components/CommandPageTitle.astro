@@ -1,0 +1,20 @@
+---
+const { entry, id } = Astro.locals.starlightRoute;
+const documentPath = `/root/${id || entry.id || 'index'}`.replace(/\/index$/, '');
+const checksum = Array.from(documentPath).reduce((sum, character) => (sum + character.charCodeAt(0)) % 65535, 0)
+	.toString(16)
+	.padStart(4, '0')
+	.toUpperCase();
+---
+
+<div class="document-command-header">
+  <p class="document-command-header__path">
+    <span aria-hidden="true">root@tartarus:~$</span> cd {documentPath}
+  </p>
+  <div class="document-command-header__readout" aria-label="Технические сведения о документе">
+    <span>NODE: ARCHIVE-01</span>
+    <span>MODE: READ_ONLY</span>
+    <span>CRC: {checksum}</span>
+  </div>
+  <h1 id="_top">{entry.data.title}</h1>
+</div>
