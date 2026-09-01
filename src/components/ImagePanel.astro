@@ -1,33 +1,236 @@
 ---
-const { src = '/placeholder.jpg', alt = 'Документальное изображение', caption = 'Подпись изображения' } = Astro.props;
+interface Props {
+  src?: string;
+  alt?: string;
+  caption?: string;
+  reference?: string;
+  source?: string;
+}
+
+const {
+  src = '/placeholder.jpg',
+  alt = 'Документальное изображение',
+  caption = 'Подпись изображения',
+  reference = 'IMG-0001',
+  source = 'ARCHIVE NODE-01',
+} = Astro.props;
 ---
 
 <figure class="image-panel">
-  <img src={src} alt={alt} />
-  <figcaption>{caption}</figcaption>
+  <div class="image-panel__header">
+    <span class="image-panel__type">
+      <span class="image-panel__indicator" aria-hidden="true"></span>
+      VISUAL RECORD
+    </span>
+
+    <span class="image-panel__reference">
+      {reference}
+    </span>
+  </div>
+
+  <div class="image-panel__viewport">
+    <img src={src} alt={alt} loading="lazy" />
+
+    <div class="image-panel__overlay" aria-hidden="true">
+      <span>ARCHIVE-01</span>
+      <span>READ_ONLY</span>
+    </div>
+
+    <div class="image-panel__corner image-panel__corner--tl" aria-hidden="true"></div>
+    <div class="image-panel__corner image-panel__corner--tr" aria-hidden="true"></div>
+    <div class="image-panel__corner image-panel__corner--bl" aria-hidden="true"></div>
+    <div class="image-panel__corner image-panel__corner--br" aria-hidden="true"></div>
+  </div>
+
+  <figcaption class="image-panel__caption">
+    <span class="image-panel__caption-mark" aria-hidden="true">//</span>
+
+    <span class="image-panel__caption-text">
+      {caption}
+    </span>
+  </figcaption>
+
+  <div class="image-panel__footer">
+    <span>SOURCE: {source}</span>
+    <span>STATUS: VERIFIED</span>
+  </div>
 </figure>
 
 <style is:global>
   .image-panel {
-    margin: 1.5rem 0;
-    padding: 0;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
+    position: relative;
+    margin: 1.75rem 0 2rem;
+
+    border: 1px solid var(--sl-color-gray-2);
+
+    background: #0d0d0d;
+
+    font-family: var(--sl-font-mono);
+  }
+
+  .image-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0.45rem 0.7rem;
+
+    border-bottom: 1px solid var(--sl-color-gray-2);
+
+    background: #111;
+
+    color: var(--sl-color-gray-3);
+
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+
+  .image-panel__type {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    color: var(--sl-color-text-accent);
+  }
+
+  .image-panel__indicator {
+    width: 5px;
+    height: 5px;
+
+    background: currentColor;
+
+    box-shadow: 0 0 6px currentColor;
+  }
+
+  .image-panel__reference {
+    opacity: 0.6;
+  }
+
+  .image-panel__viewport {
+    position: relative;
+    overflow: hidden;
+
+    background: #080808;
   }
 
   .image-panel img {
     display: block;
     width: 100%;
+    height: auto;
+
     filter: grayscale(1) contrast(1.12);
-    border: 0;
+
+    transition:
+      filter 250ms ease,
+      transform 400ms ease;
   }
 
-  .image-panel figcaption {
-    margin-top: 0.7rem;
-    color: var(--sl-color-gray-2);
-    font: 700 0.7rem var(--sl-font-mono);
-    letter-spacing: 0.08em;
+  .image-panel:hover img {
+    filter: grayscale(0.8) contrast(1.08);
+    transform: scale(1.01);
+  }
+
+  .image-panel__overlay {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    padding: 0.6rem 0.7rem;
+
+    pointer-events: none;
+
+    color: rgba(255, 255, 255, 0.45);
+
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+  }
+
+  .image-panel__corner {
+    position: absolute;
+
+    width: 12px;
+    height: 12px;
+
+    border-color: var(--sl-color-text-accent);
+    border-style: solid;
+
+    opacity: 0.75;
+
+    pointer-events: none;
+  }
+
+  .image-panel__corner--tl {
+    top: 8px;
+    left: 8px;
+    border-width: 1px 0 0 1px;
+  }
+
+  .image-panel__corner--tr {
+    top: 8px;
+    right: 8px;
+    border-width: 1px 1px 0 0;
+  }
+
+  .image-panel__corner--bl {
+    bottom: 8px;
+    left: 8px;
+    border-width: 0 0 1px 1px;
+  }
+
+  .image-panel__corner--br {
+    right: 8px;
+    bottom: 8px;
+    border-width: 0 1px 1px 0;
+  }
+
+  .image-panel__caption {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+
+    margin: 0;
+    padding: 0.7rem 0.8rem 0.45rem;
+
+    color: var(--sl-color-text);
+
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .image-panel__caption-mark {
+    color: var(--sl-color-text-accent);
+    opacity: 0.7;
+  }
+
+  .image-panel__caption-text {
     text-transform: uppercase;
+  }
+
+  .image-panel__footer {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 0.35rem 0.8rem 0.55rem;
+
+    color: var(--sl-color-gray-3);
+
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 600px) {
+    .image-panel__footer {
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .image-panel__overlay {
+      display: none;
+    }
   }
 </style>

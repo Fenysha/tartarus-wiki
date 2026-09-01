@@ -1,54 +1,178 @@
 ---
-const { security = 'Классификация D', threat = 'Низкая', path = '/docs/', status = 'Открытый архив' } = Astro.props;
+const {
+  security = 'EKHU',
+  threat = 'LOW',
+  status = 'OPEN'
+} = Astro.props;
+
+const securityLevels = {
+  EKHU: {
+    name: 'Экху',
+    description: 'Открытый архив',
+  },
+  LIMN: {
+    name: 'Лимн',
+    description: 'Служебная информация',
+  },
+  SIGMA: {
+    name: 'Сигма',
+    description: 'Ограниченный доступ',
+  },
+  THETA: {
+    name: 'Тета',
+    description: 'Конфиденциально',
+  },
+  OMEGA: {
+    name: 'Омега',
+    description: 'Особо секретно',
+  },
+  TARTAR: {
+    name: 'Тартар',
+    description: 'Абсолютное ограничение',
+  },
+};
+
+const threats = {
+  LOW: 'Низкая',
+  MEDIUM: 'Средняя',
+  HIGH: 'Высокая',
+  CRITICAL: 'Критическая',
+  UNKNOWN: 'Неизвестна',
+};
+
+const statuses = {
+  OPEN: 'Открытый архив',
+  RESTRICTED: 'Ограниченный доступ',
+  SEALED: 'Запечатано',
+  CORRUPTED: 'Повреждено',
+  CLASSIFIED: 'Засекречено',
+};
+
+const level = securityLevels[security] ?? securityLevels.EKHU;
 ---
 
-<div class="doc-header">
-  <div class="doc-header-item">
-    <span>Уровень секретности</span>
-    <strong>{security}</strong>
+<div class={`doc-header security-${security.toLowerCase()}`}>
+  <div class="doc-header__indicator" aria-hidden="true">
+    <span></span>
   </div>
-  <div class="doc-header-item">
-    <span>Угрозы</span>
-    <strong>{threat}</strong>
+
+  <div class="doc-header__classification">
+    <span class="doc-header__label">SECURITY CLASS</span>
+    <strong>{level.name}</strong>
+    <small>{level.description}</small>
   </div>
-  <div class="doc-header-item">
-    <span>Путь</span>
-    <strong>{path}</strong>
+
+  <div class="doc-header__item">
+    <span class="doc-header__label">THREAT LEVEL</span>
+    <strong>{threats[threat] ?? threat}</strong>
   </div>
-  <div class="doc-header-item">
-    <span>Статус</span>
-    <strong>{status}</strong>
+
+  <div class="doc-header__item">
+    <span class="doc-header__label">DOCUMENT STATUS</span>
+    <strong>{statuses[status] ?? status}</strong>
+  </div>
+
+  <div class="doc-header__code" aria-hidden="true">
+    {security}
   </div>
 </div>
 
 <style is:global>
   .doc-header {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.65rem;
-    margin: 1.25rem 0 2rem;
-    padding: 0;
-    background: transparent;
-    border: 0;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 1px;
+    margin: 1.5rem 0 2rem;
+    overflow: hidden;
+
+    background: var(--sl-color-gray-2);
+    border: 1px solid var(--sl-color-gray-2);
+
+    font-family: var(--sl-font-mono);
   }
 
-  .doc-header-item {
+  .doc-header__classification,
+  .doc-header__item {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-    padding: 0.6rem 0.8rem;
+    justify-content: center;
+    min-height: 72px;
+    padding: 0.75rem 1rem;
+
     background: #111;
-    border-left: 1px solid var(--sl-color-gray-2);
   }
 
-  .doc-header-item span {
-    font: 700 0.62rem var(--sl-font-mono);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+  .doc-header__classification {
+    padding-left: 1.25rem;
+  }
+
+  .doc-header__label {
+    margin-bottom: 0.3rem;
+
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+
     color: var(--sl-color-text-accent);
   }
 
-  .doc-header-item strong {
-    font: 700 0.9rem var(--sl-font-mono);
+  .doc-header strong {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .doc-header small {
+    margin-top: 0.15rem;
+    font-size: 0.65rem;
+    opacity: 0.55;
+  }
+
+  .doc-header__indicator {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    z-index: 2;
+
+    background: var(--sl-color-text-accent);
+  }
+
+  .doc-header__indicator span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 22px;
+
+    background: currentColor;
+    box-shadow:
+      0 25px currentColor,
+      0 50px currentColor;
+    
+    opacity: 0.35;
+  }
+
+  .doc-header__code {
+    position: absolute;
+    right: 0.65rem;
+    bottom: 0.35rem;
+
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+
+    opacity: 0.18;
+  }
+
+  @media (max-width: 700px) {
+    .doc-header {
+      grid-template-columns: 1fr;
+    }
+
+    .doc-header__classification,
+    .doc-header__item {
+      min-height: 60px;
+    }
   }
 </style>

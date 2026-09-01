@@ -1,50 +1,192 @@
 ---
-const { rows = [] } = Astro.props;
+interface Row {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  rows?: Row[];
+  labelHeader?: string;
+  valueHeader?: string;
+}
+
+const {
+  rows = [],
+  labelHeader = 'Параметр',
+  valueHeader = 'Значение',
+} = Astro.props;
 ---
 
-<table class="data-table">
-  <thead>
-    <tr>
-      <th>Параметр</th>
-      <th>Значение</th>
-    </tr>
-  </thead>
-  <tbody>
-    {rows.map((row) => (
+<div class="data-table-wrapper">
+  <div class="data-table-meta">
+    <span>ARCHIVE DATA</span>
+    <span>{rows.length.toString().padStart(2, '0')} ENTRIES</span>
+  </div>
+
+  <table class="data-table">
+    <thead>
       <tr>
-        <td>{row.label}</td>
-        <td>{row.value}</td>
+        <th>{labelHeader}</th>
+        <th>{valueHeader}</th>
       </tr>
-    ))}
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      {rows.map((row, index) => (
+        <tr>
+          <td class="data-table__label">
+            <span class="data-table__index">
+              {(index + 1).toString().padStart(2, '0')}
+            </span>
+            {row.label}
+          </td>
+
+          <td class="data-table__value">
+            {row.value}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <div class="data-table-footer">
+    <span>END OF RECORD</span>
+    <span aria-hidden="true">///</span>
+  </div>
+</div>
 
 <style is:global>
-  .data-table {
+  .data-table-wrapper {
+    position: relative;
     width: 100%;
-    margin: 1.5rem 0;
-    border-collapse: collapse;
-    overflow: hidden;
-    border: 0;
-    background: transparent;
+    margin: 1.5rem 0 2rem;
+    font-family: var(--sl-font-mono);
   }
 
-  .data-table th,
-  .data-table td {
-    padding: 0.85rem 1rem;
-    border-bottom: 1px solid var(--sl-color-border);
-    text-align: left;
+  .data-table-meta,
+  .data-table-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0.45rem 0.7rem;
+
+    color: var(--sl-color-text-accent);
+
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .data-table-meta {
+    border: 1px solid var(--sl-color-gray-2);
+    border-bottom: 0;
+
+    background: #111;
+  }
+
+  .data-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+
+    border: 1px solid var(--sl-color-gray-2);
+
+    background: #0d0d0d;
+
+    font-size: 0.82rem;
   }
 
   .data-table th {
+    position: relative;
+
+    padding: 0.7rem 0.85rem;
+
+    border-bottom: 1px solid var(--sl-color-gray-2);
+
     background: #171717;
+
     color: var(--sl-color-text-accent);
-    letter-spacing: 0.12em;
+
+    text-align: left;
+
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    font: 700 0.68rem var(--sl-font-mono);
+  }
+
+  .data-table th:first-child {
+    width: 38%;
   }
 
   .data-table td {
+    padding: 0.7rem 0.85rem;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
     color: var(--sl-color-text);
+
+    vertical-align: middle;
+  }
+
+  .data-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .data-table tbody tr {
+    transition:
+      background-color 120ms ease,
+      transform 120ms ease;
+  }
+
+  .data-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .data-table__label {
+    font-weight: 600;
+  }
+
+  .data-table__index {
+    display: inline-block;
+    min-width: 2rem;
+    margin-right: 0.5rem;
+
+    color: var(--sl-color-gray-3);
+
+    font-size: 0.6rem;
+    font-weight: 700;
+  }
+
+  .data-table__value {
+    color: var(--sl-color-gray-2);
+  }
+
+  .data-table-footer {
+    border: 1px solid var(--sl-color-gray-2);
+    border-top: 0;
+
+    color: var(--sl-color-gray-3);
+  }
+
+  @media (max-width: 600px) {
+    .data-table {
+      font-size: 0.75rem;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 0.6rem 0.65rem;
+    }
+
+    .data-table th:first-child {
+      width: 45%;
+    }
+
+    .data-table__index {
+      display: none;
+    }
   }
 </style>
