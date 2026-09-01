@@ -7,7 +7,10 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "docs:new": "node ./scripts/new-doc.mjs",
+    "docs:verify": "node ./scripts/verify-docs.mjs",
+    "auth:demo": "node ./backend/discord-oauth-example.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.41.10",

@@ -1,0 +1,47 @@
+---
+const { title = 'Блок данных', icon = 'document', body = 'Описание блока.' } = Astro.props;
+---
+
+<article class="info-card">
+  <div class="info-card__icon">{icon}</div>
+  <div>
+    <h3>{title}</h3>
+    <p>{body}</p>
+  </div>
+</article>
+
+<style is:global>
+  .info-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    background: rgba(19, 17, 14, 0.8);
+    border: 1px solid var(--sl-color-border);
+    border-radius: 0.8rem;
+    box-shadow: var(--sl-shadow-lg);
+  }
+
+  .info-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background: rgba(242, 193, 78, 0.12);
+    color: var(--sl-color-accent-high);
+    font-weight: 700;
+  }
+
+  .info-card h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.05rem;
+    color: var(--sl-color-text-accent);
+  }
+
+  .info-card p {
+    margin: 0;
+    color: var(--sl-color-text);
+    opacity: 0.9;
+  }
+</style>

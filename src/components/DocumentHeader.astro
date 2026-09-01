@@ -1,0 +1,56 @@
+---
+const { security = 'Классификация D', threat = 'Низкая', path = '/docs/', status = 'Открытый архив' } = Astro.props;
+---
+
+<div class="doc-header">
+  <div class="doc-header-item">
+    <span>Уровень секретности</span>
+    <strong>{security}</strong>
+  </div>
+  <div class="doc-header-item">
+    <span>Угрозы</span>
+    <strong>{threat}</strong>
+  </div>
+  <div class="doc-header-item">
+    <span>Путь</span>
+    <strong>{path}</strong>
+  </div>
+  <div class="doc-header-item">
+    <span>Статус</span>
+    <strong>{status}</strong>
+  </div>
+</div>
+
+<style is:global>
+  .doc-header {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.8rem;
+    margin: 1.25rem 0 2rem;
+    padding: 1rem 1.2rem;
+    background: rgba(242, 193, 78, 0.05);
+    border: 1px solid var(--sl-color-border);
+    border-radius: 0.8rem;
+  }
+
+  .doc-header-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.7rem 0.8rem;
+    background: rgba(0, 0, 0, 0.18);
+    border-left: 2px solid var(--sl-color-accent);
+  }
+
+  .doc-header-item span {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sl-color-text-accent);
+  }
+
+  .doc-header-item strong {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+</style>

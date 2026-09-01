@@ -2,14 +2,27 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// https://astro.build/config
 export default defineConfig({
 	site: 'https://tesharienjoer.github.io',
 	base: '/tartarus-wiki',
 
 	integrations: [
 		starlight({
-			title: 'Tartarus Archive',
+			title: 'Tartarus Project Wiki',
+			description:
+				'Архивные документы сервера Tartarus Project: секретные материалы, события и сущности мира.',
+			locales: {
+				root: {
+					label: 'Русский',
+					lang: 'ru',
+				},
+				en: {
+					label: 'English',
+					lang: 'en',
+				},
+			},
+			defaultLocale: 'root',
+			tableOfContents: false,
 
 			social: [
 				{
@@ -21,12 +34,27 @@ export default defineConfig({
 
 			sidebar: [
 				{
-					label: 'Документация',
-					items: [
-						{ label: 'Главная', slug: 'index' },
-					],
+					label: 'Главная',
+					items: [{ label: 'Главная', slug: '' }],
+				},
+				{
+					label: 'Документы',
+					items: [{ autogenerate: { directory: 'docs' } }],
+				},
+				{
+					label: 'Лор',
+					items: [{ autogenerate: { directory: 'lore' } }],
+				},
+				{
+					label: 'Эвенты',
+					items: [{ autogenerate: { directory: 'events' } }],
+				},
+				{
+					label: 'Руководства',
+					items: [{ autogenerate: { directory: 'guides' } }],
 				},
 			],
+			customCss: ['./src/styles/custom.css'],
 		}),
 	],
 });
