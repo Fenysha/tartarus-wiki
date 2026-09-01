@@ -25,32 +25,31 @@ const { security = 'Классификация D', threat = 'Низкая', path
   .doc-header {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 0.8rem;
+    gap: 1px;
     margin: 1.25rem 0 2rem;
-    padding: 1rem 1.2rem;
-    background: rgba(242, 193, 78, 0.05);
+    padding: 1px;
+    background: var(--sl-color-border);
     border: 1px solid var(--sl-color-border);
-    border-radius: 0.8rem;
+    border-radius: 0;
   }
 
   .doc-header-item {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    padding: 0.7rem 0.8rem;
-    background: rgba(0, 0, 0, 0.18);
-    border-left: 2px solid var(--sl-color-accent);
+    padding: 0.8rem 0.9rem;
+    background: #171b15;
+    border-left: 3px solid var(--sl-color-accent);
   }
 
   .doc-header-item span {
-    font-size: 0.7rem;
+    font: 700 0.62rem var(--sl-font-mono);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--sl-color-text-accent);
   }
 
   .doc-header-item strong {
-    font-size: 1rem;
-    font-weight: 700;
+    font: 700 0.9rem var(--sl-font-mono);
   }
 </style>
