@@ -1,0 +1,40 @@
+---
+import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
+import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+
+const { sidebar } = Astro.locals.starlightRoute;
+---
+
+<div class="command-sidebar" aria-label="Навигация архива">
+  <div class="command-sidebar__status" aria-label="Статус сети">
+    <span class="command-sidebar__signal" aria-hidden="true"></span>
+    <span>СЕТЬ: В СТРОЮ</span>
+  </div>
+
+  <div class="command-sidebar__terminal" aria-hidden="true">
+    <span>TARTARUS://</span>
+    <span>ARCHIVE_NODE-01</span>
+  </div>
+
+  <div class="command-sidebar__prompt" aria-hidden="true">
+    <span class="command-sidebar__prompt-mark">&gt;</span>
+    <span>ВЫБЕРИТЕ РАЗДЕЛ</span>
+  </div>
+
+  <nav class="command-sidebar__navigation" aria-label="Разделы вики">
+    <SidebarPersister>
+      <SidebarSublist sublist={sidebar} />
+    </SidebarPersister>
+  </nav>
+
+  <div class="command-sidebar__footer" aria-label="Сведения об архиве">
+    <div><span>ПРОТОКОЛ</span><strong>R-17</strong></div>
+    <div><span>ДОСТУП</span><strong>ОГРАНИЧЕН</strong></div>
+    <p><span aria-hidden="true">$</span> awaiting input_<i aria-hidden="true"></i></p>
+  </div>
+</div>
+
+<div class="md:sl-hidden">
+  <MobileMenuFooter />
+</div>
