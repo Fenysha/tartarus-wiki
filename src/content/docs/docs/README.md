@@ -3,7 +3,7 @@ title: Документная база
 description: Руководство по оформлению новых документов
 ---
 
-🚧 Раздел в разработке. Добавляйте свой контент через GitHub!
+[in development] Add your content via GitHub!
 ---
 ```
 

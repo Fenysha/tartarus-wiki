@@ -2,4 +2,4 @@
 title: Tartarus Lore
 ---
 
-🚧 Section under development.
+[in development]

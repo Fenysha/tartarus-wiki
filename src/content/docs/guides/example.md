@@ -1,9 +1,9 @@
 ---
-title: Гайды
-description: Туториалы и рекомендации
+title: Guides
+description: Tutorials and recommendations
 ---
 
-## 📚 Раздел гайдов
+## Guides section
 
 Этот раздел содержит полезные гайды и туториалы для игроков.
 

@@ -3,9 +3,9 @@ title: Протоколы
 description: Служебные материалы
 ---
 
-🚧 Раздел в разработке.
-- регистрация событий;
-- внутренний документооборот.
+[in development]
+- event registration;
+- internal documentation.
 
 ## Применение
 

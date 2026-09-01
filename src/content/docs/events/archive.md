@@ -3,4 +3,4 @@ title: Архив событий
 description: История уже прошедших событий
 ---
 
-🚧 Раздел в разработке. Добавляйте свой контент через GitHub!
+[in development] Add your content via GitHub!

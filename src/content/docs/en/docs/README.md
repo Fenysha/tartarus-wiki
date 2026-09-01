@@ -3,7 +3,7 @@ title: Documentation base
 description: Guide for formatting new documents
 ---
 
-🚧 Section under development. Add your materials via GitHub!
+[in development] Add your materials via GitHub!
 ---
 ```
 

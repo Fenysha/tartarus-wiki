@@ -3,10 +3,10 @@ title: Реестр аномалий
 description: Каталог объектов и явлений
 ---
 
-🚧 Раздел в разработке.
-- уровень опасности;
-- последствия для мира;
-- наблюдения и статусы.
+[in development]
+- danger level;
+- consequences for the world;
+- observations and statuses.
 
 ## Пример структуры записи
 

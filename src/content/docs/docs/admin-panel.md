@@ -2,6 +2,8 @@
 title: О Проекте
 ---
 
-🚧 Раздел в разработке.
+[in development]
+
+Section is under development.
 
 **Присылайте документы через GitHub Pull Requests!**
