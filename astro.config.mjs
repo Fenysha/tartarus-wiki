@@ -1,6 +1,9 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { GAME_SERVER_URL } from './src/lib/game-server.ts';
+
+export { GAME_SERVER_URL };
 
 export default defineConfig({
 	site: 'https://tesharienjoer.github.io',
@@ -36,6 +39,10 @@ export default defineConfig({
 				{
 					label: 'Главная',
 					items: [{ label: 'Главная', slug: '' }],
+				},
+				{
+					label: 'Игровой сервер',
+					items: [{ label: 'Подключиться к серверу', link: '/tartarus-wiki/join' }],
 				},
 				{
 					label: 'Документы',

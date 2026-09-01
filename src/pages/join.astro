@@ -1,0 +1,18 @@
+---
+import { GAME_SERVER_URL } from '../lib/game-server';
+---
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${GAME_SERVER_URL}`} />
+    <title>Подключение к серверу Tartarus</title>
+  </head>
+  <body>
+    <p>Перенаправление на игровой сервер…</p>
+    <p>
+      Если вы не были автоматически перенаправлены, откройте ссылку:
+      <a href={GAME_SERVER_URL}>{GAME_SERVER_URL}</a>
+    </p>
+  </body>
+</html>
