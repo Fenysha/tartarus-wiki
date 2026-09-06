@@ -5,31 +5,39 @@ import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
 const { sidebar } = Astro.locals.starlightRoute;
 ---
 
-<div class="command-sidebar" aria-label="Навигация архива">
-  <div class="command-sidebar__status" aria-label="Статус сети">
+<aside class="command-sidebar" aria-label="Навигация архива">
+
+  <div class="command-sidebar__status">
     <span class="command-sidebar__signal" aria-hidden="true"></span>
-    <span>СИСТЕМА: ONLINE</span>
+    <span>domain: online</span>
   </div>
 
   <div class="command-sidebar__terminal" aria-hidden="true">
-    <span>TARTARUS://</span>
+    <span/>
     <span>ARCHIVE_NODE-01</span>
   </div>
 
   <div class="command-sidebar__prompt" aria-hidden="true">
     <span class="command-sidebar__prompt-mark">&gt;</span>
-    <span>НАВИГАЦИОННОЕ ДЕРЕВО</span>
+    <span>NAVIGATION TREE</span>
   </div>
 
-  <nav class="command-sidebar__navigation" aria-label="Разделы вики">
+  <nav
+    class="command-sidebar__navigation"
+    aria-label="Разделы вики"
+  >
     <SidebarPersister>
       <SidebarSublist sublist={sidebar} />
     </SidebarPersister>
   </nav>
 
-  <div class="command-sidebar__footer" aria-label="Сведения об архиве">
-    <div><span>ПРОТОКОЛ</span><strong>TTY/01</strong></div>
-    <div><span>КАНАЛ</span><strong>LOCALHOST</strong></div>
-    <p><span aria-hidden="true">$</span> awaiting input_<i aria-hidden="true"></i></p>
-  </div>
-</div>
+  <footer class="command-sidebar__footer">
+    <div><span>PROTOCOL</span><strong>TTY/01</strong></div>
+    <div><span>CHANNEL</span><strong>LOCALHOST</strong></div>
+    <p>
+      <span aria-hidden="true">$</span>
+      awaiting input_<i aria-hidden="true"></i>
+    </p>
+  </footer>
+
+</aside>

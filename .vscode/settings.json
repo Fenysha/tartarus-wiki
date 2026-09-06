@@ -1,2 +1,17 @@
 {
+  "[mdx]": {
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.formatOnSave": true,
+    // Массив чисел указывает, на каких символах рисовать линии
+    "editor.rulers": [100], 
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 100
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.formatOnSave": true,
+    "editor.rulers": [100],
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 100
+  }
 }

@@ -87,15 +87,20 @@ const {
   }
 
   .data-table {
+    display: table;
     width: 100%;
+
+    max-width: none;
+    min-width: 100%;
+    
     margin: 0;
     border-collapse: collapse;
-
+    
     border: 1px solid var(--sl-color-gray-2);
-
+    
     background: #0d0d0d;
-
     font-size: 0.82rem;
+    table-layout: fixed;
   }
 
   .data-table th {
@@ -117,7 +122,8 @@ const {
     text-transform: uppercase;
   }
 
-  .data-table th:first-child {
+  .data-table th:first-child,
+  .data-table td:first-child {
     width: 38%;
   }
 
@@ -162,8 +168,8 @@ const {
 
   .data-table__value {
     color: var(--sl-color-gray-2);
+    text-align: left;
   }
-
   .data-table-footer {
     border: 1px solid var(--sl-color-gray-2);
     border-top: 0;
