@@ -1,0 +1,208 @@
+---
+title: Khara Infection
+---
+
+import ImagePanel from "@/components/ImagePanel.astro"
+import DocumentHeader from "@/components/DocumentHeader.astro"
+import DataTable from "@components/DataTable.astro"
+
+# Khara Infection
+
+<DocumentHeader
+  security="SIGMA"
+  threat="HIGH"
+  status="CLASSIFIED"
+/>
+
+## General Information
+
+**Khara** is a bioengineered pathogen of extraterrestrial origin that spreads in the form of **Veral khara** spores.
+
+Once inside a host, the spores begin colonizing organic tissue and cause accelerated cellular transformation. During the early stages, the infection may resemble a rapidly developing form of cancer. As the disease progresses, a new biological structure begins to develop within the host.
+
+Khara does not rely on conventional immune mechanisms and can infect an organism regardless of its natural resistance to viral diseases.
+
+## Routes of Infection
+
+Khara spores can enter the body through inhalation of contaminated air or direct contact with infected material.
+
+During the later stages of infection, the host begins releasing **Khara miasma**, which can spread the infection through the surrounding environment.
+
+Infected mutants pose an additional threat. Their attacks can transmit the infection through tissue damage, making direct contact with them highly inadvisable whenever possible.
+
+## Stages of Infection
+
+Khara progresses through seven stages of development. The early stages produce relatively mild symptoms, but pathological changes become increasingly severe as the infection progresses.
+
+<DataTable
+  labelHeader="Stage"
+  valueHeader="Primary Symptoms"
+  rows={[
+    {
+      label: "I",
+      value: "Coughing, a sensation of warmth beneath the skin, and mild tingling in the extremities."
+    },
+    {
+      label: "II–III",
+      value: "Pain, headaches, confusion, weakness, and joint pain."
+    },
+    {
+      label: "IV",
+      value: "Formation of internal growths, severe pain, and numbness of the extremities."
+    },
+    {
+      label: "V",
+      value: "Pronounced tumor growth, impaired vision, weakness, and the onset of miasma production."
+    },
+    {
+      label: "VI",
+      value: "Tremors, impaired motor functions, vomiting blood, and increased miasma production."
+    },
+    {
+      label: "VII",
+      value: "Full development of the infection and preparation of the host for subsequent mutation."
+    }
+  ]}
+/>
+
+At advanced stages, the infection can be easily detected by standard medical scanners. During the early stages, it is almost impossible for them to detect.
+
+Disposable rapid tests can be used for preliminary diagnosis. These can be manufactured in the protolathe with only a minimal amount of Khara research.
+
+<ImagePanel
+  src="trainstation/khara_test.png"
+  alt="Rapid test results for Khara infection"
+  caption="Test results from different test subjects."
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+> **Important:** The rapid test uses blood as its sample.
+
+## Countermeasures
+
+Khara is considered incurable, but its progression can be significantly slowed and, at certain stages, partially reversed.
+
+**Anacea** is the most effective known agent for suppressing the spores. Combined administration of **Technetium-99** enhances its effect.
+
+**Rezadone** and **Haloperidol** can also slow the progression of the infection, although their effectiveness decreases as the disease advances.
+
+<DataTable
+  labelHeader="Treatment"
+  valueHeader="Effect"
+  rows={[
+    {
+      label: "Anacea",
+      value: "The most effective known treatment against Khara spores."
+    },
+    {
+      label: "Technetium-99",
+      value: "Enhances the effects of Anacea."
+    },
+    {
+      label: "Rezadone",
+      value: "Slows the progression of the infection and may partially reverse its development."
+    },
+    {
+      label: "Haloperidol",
+      value: "Further slows the progression of the infection."
+    }
+  ]}
+/>
+
+## Protection Against Spores
+
+<ImagePanel
+  src="trainstation/khara_fog.png"
+  alt="Infected station covered by Khara Fog"
+  caption="Infected station."
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+Khara spores can enter the body through the respiratory tract or through direct contact with infected material.
+
+The **Khara Fog** poses a particular threat. It is a dense form of contaminated environment capable of spreading spores across a considerable area.
+
+Ordinary clothing does not provide sufficient protection against contaminated atmospheres. Personnel operating in infected areas must use respiratory protection.
+
+A combined biological protection rating of **7 BIO or higher** from the suit and mask completely prevents exposure to **Khara Fog**.
+
+Using an internal air supply also prevents infection through inhalation of the surrounding atmosphere.
+
+However, respiratory protection does not provide complete protection against direct contact between spores and the body. Preventing this form of infection requires a higher level of biological protection.
+
+<DataTable
+  labelHeader="Protection"
+  valueHeader="Result"
+  rows={[
+    {
+      label: "Exposed Face",
+      value: "No protection. Infection is possible through inhalation of spores."
+    },
+    {
+      label: "Respiratory Protection",
+      value: "Prevents direct inhalation of contaminated air."
+    },
+    {
+      label: "7+ BIO",
+      value: "A combined biological protection rating of the suit and mask prevents exposure to Khara Fog."
+    },
+    {
+      label: "Internal Air Supply",
+      value: "Completely prevents the use of surrounding air for respiration."
+    },
+    {
+      label: "8+ BIO",
+      value: "A combined biological protection rating of the suit and headgear prevents spore exposure through direct contact."
+    }
+  ]}
+/>
+
+> **Important:** A significant portion of remote stations is infected. Every crew member must have access to biological protective equipment before disembarking.
+
+## Morphological Engine
+
+The **Morphological Engine** is the primary system for suppressing Khara within the protected area of the train.
+
+<ImagePanel
+  src="trainstation/morh_engine.png"
+  alt="Morphological Engine"
+  caption="Morphological Engine installed aboard the Belus-06."
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+Depending on its selected configuration, the engine can create a physical barrier against mutants, slow the progression of Khara, or directly destroy infected cells.
+
+For more information, see the [corresponding article](../morph_engine).
+
+## Khara Mutants
+
+Mutants are organisms formed through the further development of Khara.
+
+Most known forms possess considerable physical resilience and can regenerate damage if they are not subjected to further injury for a period of time.
+
+Mutants retain the ability to transmit Khara through attacks and may remain dangerous even after sustaining severe damage.
+
+A common vulnerability among many forms is electrical interference. A sufficiently powerful electrical discharge can temporarily incapacitate a mutant.
+
+Some forms possess high resistance to weaker weapons. Weapons that inflict insufficient damage may have little to no effect on them. More powerful melee weapons, on the other hand, can inflict significantly greater damage.
+
+## Combat Recommendations
+
+Engaging Khara mutants in close combat without suitable weapons is not recommended. Specialized anti-Khara weaponry can effectively eliminate certain mutant forms at close range.
+
+The primary objective during an encounter is to maintain continuous pressure on the target and prevent it from beginning to regenerate. Electrical shocks can be used to temporarily incapacitate particularly dangerous targets.
+
+Avoid contact with blood and other biological remains left by mutants. If the skin has open wounds, such contact presents an additional risk of infection.
+
+## Post-Mortem Mutation
+
+The death of an infected individual does not always mean that the threat has ended.
+
+If the infection has reached a sufficiently advanced stage, Khara continues developing within the corpse. After some time, the formation of a new organism begins.
+
+For this reason, the bodies of patients who died from severe infection should not be left unattended.
+
+A deceased infected individual should be treated as a potential source of further Khara propagation until their condition has been confirmed safe.

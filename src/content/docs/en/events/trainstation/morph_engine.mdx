@@ -1,0 +1,135 @@
+---
+title: Morphological Engine
+---
+
+import ImagePanel from "@/components/ImagePanel.astro"
+import DocumentHeader from "@/components/DocumentHeader.astro"
+import DataTable from '@components/DataTable.astro';
+
+<DocumentHeader
+  security="SIGMA"
+  threat="HIGH"
+  status="CLASSIFIED"
+/>
+
+## Morphological Engine
+
+The **Morphological Engine** is the primary system protecting the internal space of **Belus-06** from the spread of the Khara mutation. The device is installed in the engineering car and serves as the sole source of the protective field for the entire train.
+
+The engine can operate in three modes simultaneously. Each mode serves a separate purpose and requires additional power. The modes can be combined.
+
+<ImagePanel
+  src="trainstation/morh_engine.png"
+  alt="Morphological Engine"
+  caption="Morphological Engine installed aboard the Belus-06."
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+### Operating Modes
+
+<DataTable
+  labelHeader="Mode"
+  valueHeader="Description"
+  rows={[
+    {
+      label: "Barrier — 20 KW",
+      value: "Creates a physical energy barrier along the boundary of the protected area. Khara mutants cannot enter the protected area from outside; attempting to cross the barrier repels them. Movement within the protected area and leaving it are not restricted."
+    },
+    {
+      label: "Containment — 40 KW",
+      value: "Generates anomalous radiation that slows the development and spread of Khara cells within the protected area. The infection itself is not destroyed."
+    },
+    {
+      label: "Isolation — 100 KW",
+      value: "Subjects Khara cells to concentrated energy waves, actively destroying infected tissue and significantly reducing the spread of the mutation. This mode consumes a large amount of power and can harm infected organisms located within the protected area."
+    }
+  ]}
+/>
+
+The modes operate independently and can be enabled simultaneously. For example, combining **Barrier + Containment** allows the crew to prevent mutants from physically entering the protected area while simultaneously slowing existing infections.
+
+> **Important:** Power consumption from each mode is cumulative. With Barrier, Containment, and Isolation enabled, the engine consumes **160 KW** of additional power.
+
+### Protected Area
+
+The protective effects do not cover the entire world. They only apply to predefined areas of the train. In the standard configuration, the engine protects the train's internal compartments.
+
+When the engine is activated, the corresponding areas acquire protective properties. This allows Khara systems to identify the compartment as an area covered by the Morphological Engine.
+
+Barrier operates directly along the boundary of such an area. Therefore, a mutant outside the protected area cannot enter the compartment, while creatures already inside can move freely and leave the protected area.
+
+<ImagePanel
+  src="trainstation/barrier_showcase.gif"
+  alt="Protective barrier"
+  caption="A mutant attempts to enter the train, but the barrier blocks it."
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+### Engine Controls
+
+To turn the engine on or off, interact directly with the device.
+
+The operation takes **10 seconds** and can be interrupted. After each activation or deactivation, the engine must also undergo a **60-second** cooldown period.
+
+When activated, the engine checks the available power supply. If there is insufficient power for the selected combination of modes, the device automatically shuts down.
+
+After a successful startup, all living creatures within the protected area briefly experience the effects of the field. A visual effect and a system message indicating engine operation will also appear.
+
+If the available power becomes insufficient while the engine is operating, it will automatically shut down.
+
+### Mode Configuration
+
+The operating modes can only be changed while the engine is completely powered down.
+
+Accessing the configuration panel requires several operations to be performed in sequence:
+
+<DataTable
+  labelHeader="Step"
+  valueHeader="Action"
+  rows={[
+    {
+      label: "1",
+      value: "Remove the panel fasteners using a screwdriver."
+    },
+    {
+      label: "2",
+      value: "Tighten the internal fasteners using a wrench."
+    },
+    {
+      label: "3",
+      value: "Weld the panel's sealed connections using a welding tool."
+    },
+    {
+      label: "4",
+      value: "Select the required Barrier, Containment, and Isolation modes from the menu that appears."
+    },
+    {
+      label: "5",
+      value: "Confirm the selected configuration and proceed to calibration."
+    }
+  ]}
+/>
+
+After confirmation, a mandatory calibration procedure begins. It consists of three consecutive operations:
+
+**Screwdriver → Wrench → Welding Tool.**
+
+Each calibration stage has a chance of failure. If an error occurs, calibration is interrupted and the engine begins showing signs of overload.
+
+After all three stages are completed successfully, the selected modes become the engine's active configuration.
+
+> **Important:** Changes to the selected modes are not applied immediately. The complete configuration and calibration cycle must be completed first.
+
+### Operational Recommendations
+
+**Barrier** is most useful for physically containing infected entities and restricting access to protected compartments.
+
+**Containment** is intended for keeping an infection under control over an extended period and is particularly useful in areas where infected individuals are already present.
+
+**Isolation** should be reserved for critical situations. Despite its high effectiveness against Khara, this mode significantly increases power consumption and may harm infected crew members.
+
+In practice, the selected configuration should be based on the available power supply and the current state of the infection.
+
+> **Warning:** An open control panel prevents the engine from being activated. Complete all configuration and calibration procedures before operating the engine.

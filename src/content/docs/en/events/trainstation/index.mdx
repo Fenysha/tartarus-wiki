@@ -1,0 +1,124 @@
+---
+title: The Final Trainstation
+---
+
+## The Final Trainstation
+
+import ImagePanel from "@/components/ImagePanel.astro"
+import DocumentHeader from "@/components/DocumentHeader.astro"
+import DataTable from '@components/DataTable.astro';
+
+# The Final Trainstation
+
+<ImagePanel
+  src="trainstation_logo.png"
+  alt="Archived emblem of the The Final Trainstation domain"
+  caption="Archived Material"
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+<DocumentHeader
+  security="SIGMA"
+  threat="MEDIUM"
+  status="CLASSIFIED"
+/>
+
+## Domain Description
+
+**The Final Trainstation** is a self-contained narrative domain centered around a prolonged railway journey across an infected planet.
+
+The simulation takes place on an unnamed planet, a significant portion of whose surface has been contaminated by the **Khara** pathogen.
+
+The test subjects form the crew of the experimental railway train **Belus-06** — a modified train equipped with the systems required for long-term autonomous expeditions. The train serves simultaneously as a means of transportation, a mobile base, and the crew's primary survival tool.
+
+Unlike most known domains, the geographical structure of **The Final Trainstation** is not fixed. Routes, station locations, and individual sections of the surrounding environment may change between simulation runs. This provides considerable variation when the domain is reloaded.
+
+The crew's primary objective is to progress along the route and complete the assigned transportation task. However, the length of time spent in individual areas is directly linked to the increasing level of threat.
+
+## Environmental Conditions
+
+At the beginning of the simulation, the infection already covers a significant portion of the planet. Starting stations generally remain relatively safe and may be used by the crew to replenish supplies, repair the train, and prepare for further travel.
+
+As the crew moves farther from the initial zone, the influence of the **Khara** pathogen becomes increasingly pronounced. Environmental contamination rises, along with the likelihood of encountering hostile lifeforms and other hazards.
+
+The crew is advised to treat every stop as temporary. Prolonged stays in a single location significantly increase the likelihood of additional threats emerging.
+
+## Primary Threats
+
+Conditions within the domain may include, but are not limited to, the following threats:
+
+<DataTable
+  labelHeader="Threat"
+  valueHeader="Description"
+  rows={[
+    {
+      label: 'Infected Stations',
+      value: 'Some stations may be completely overtaken by the infection and pose an immediate threat to the crew.'
+    },
+    {
+      label: 'Raiders',
+      value: 'Hostile groups may periodically attack the train while it is moving or stationary.'
+    },
+    {
+      label: 'Pursuit',
+      value: 'An infected horde follows the train. Remaining at a station for too long may allow it to catch up and launch an attack.'
+    },
+  ]}
+/>
+
+## Simulation Features
+
+The defining feature of **The Final Trainstation** is constant movement. Unlike most domains, where the crew can relatively freely determine the pace of their progress, stopping itself constitutes a risk here.
+
+The **Belus-06** must remain operational, as its condition directly determines the crew's ability to leave infected areas and continue the mission.
+
+Damage to the train, resource shortages, or prolonged stays at individual stations can turn a relatively safe route into a critical situation.
+
+Additionally, a number of standard systems present in the base simulation configuration have been modified or completely disabled to accommodate the conditions of this domain.
+
+The primary changes are listed below.
+
+<DataTable
+  labelHeader="Mechanic"
+  valueHeader="Modification"
+  rows={[
+    {
+      label: 'Cargo and Supply',
+      value: 'Standard cargo operations are unavailable. The Express Console is also non-functional due to the planet-wide orbital blockade. Instead of a cargo shuttle, the crew can use freight docks encountered along the route. Some of these are equipped with specialized docking ports for cargo trains.'
+    },
+    {
+      label: 'R&D and Research',
+      value: 'Some research is unavailable due to the lack of a dedicated test range for explosive experiments aboard the train. Temporary testing ranges may be established at certain stations. Some technologies may also be purchased from traders.'
+    },
+    {
+      label: 'Resource Extraction',
+      value: 'Bitrunning is the primary permanent method of resource extraction. Direct mining may be performed at certain stations. Additional resources can be purchased at freight stations or discovered during expeditions.'
+    },
+    {
+      label: 'Supermatter Crystal (SM)',
+      value: 'The Supermatter Crystal cannot be used as a power source aboard the Belus-06. Attempting to install a crystal on the train causes it to detonate prematurely due to the constant mechanical vibrations of the train. This restriction cannot be bypassed through standard means. The train\'s primary power source is the steam turbine installed aboard the Belus-06.'
+    },
+    {
+      label: 'Daylight',
+      value: 'The simulation takes place on the surface of a planet illuminated by the natural light of its local star. The day-night cycle directly affects several domain systems, including the efficiency of solar panels.'
+    },
+  ]}
+/>
+
+<ImagePanel
+  src="trainstation/daylight_shown.gif"
+  alt="Example of changing daylight conditions"
+  caption="Progression of the day-night cycle"
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+## Related Materials
+
+The following guides and archival materials are related to the **The Final Trainstation** domain.
+
+- [**Train Operation and Maintenance Guide**](./how_to_train)
+- [**Khara Virus Containment Guide**](./khara_and_mutants)
+- [**Morphological Engine and You**](./morph_engine)
+- [**Steam Turbine Guide**](./steam_turbine)

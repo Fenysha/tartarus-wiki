@@ -1,0 +1,181 @@
+---
+title: Train Operation and Maintenance Guide
+---
+
+import ImagePanel from "@/components/ImagePanel.astro"
+import DocumentHeader from "@/components/DocumentHeader.astro"
+import DataTable from '@components/DataTable.astro';
+
+## Train Structure
+
+This guide contains instructions for operating **Belus-06**, maintaining its functionality, and expanding the train.
+
+Before proceeding with the maintenance of individual systems, it is important to understand which areas are considered part of the train, where construction is permitted, and what happens if a crew member leaves the train while it is moving.
+
+<ImagePanel
+  src="trainstation/train_eng_part.png"
+  alt="Engineering car"
+  caption="Section of the Belus-06 engineering car"
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+The image above highlights the primary areas associated with the train's structure.
+
+<DataTable
+  labelHeader="Area"
+  valueHeader="Description"
+  rows={[
+    {
+      label: "Red Square",
+      value: "The main body of the train. This is the original Belus-06 structure. Construction, equipment assembly, and modifications to the internal configuration are permitted within this area."
+    },
+    {
+      label: "Blue Square",
+      value: "The rail area along which the train travels. Certain sections allow additional structures to be built, making it possible to expand the train."
+    },
+    {
+      label: "Orange Square",
+      value: "The station grounds outside the train. Construction is permitted here, but structures built in this area are not considered part of the train and will remain at the station after departure."
+    }
+  ]}
+/>
+
+## Loss of Crew Members
+
+During the operation of **Belus-06**, crew members may find themselves outside the train's designated area.
+
+Anyone remaining outside the train's operational area when movement begins is considered lost. Returning to the train after departure is impossible.
+
+It is also strongly advised not to remain directly beneath walls, overhead structures, or other protruding parts of the train while it is moving. Due to the simulation's collision mechanics, contact with a moving structure may result in immediate death.
+
+> **Important:** The inability to survive or return to the train after its departure is a limitation of the domain simulation, not an inherent property of the **Belus-06** design.
+
+## Train Movement
+
+**Belus-06** requires a continuous supply of power to move. This power must be supplied directly to the train engine.
+
+<ImagePanel
+  src="trainstation/train_engine.png"
+  alt="Belus-06 engine"
+  caption="Belus-06 engine"
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+The engine is located in the engineering car and passively consumes approximately **60 MW** of power while the train is moving.
+
+If power is insufficient or the engine is damaged, the train will automatically stop. The train can also be stopped manually using the control console located in the headquarters car. Only one such console exists on the train.
+
+<ImagePanel
+  src="trainstation/train_control.png"
+  alt="Train control console"
+  caption="Train control console"
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+> **Important:** Movement terminals are distributed throughout different sections of the train. They can be used to obtain information about the current location of **Belus-06**.
+
+### Control Terminal
+
+The primary route management is performed through a dedicated control terminal.
+
+<ImagePanel
+  src="trainstation/control_terminal.png"
+  alt="Control terminal interface"
+  caption="Control terminal interface"
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION/UI"
+/>
+
+<DataTable
+  labelHeader="Area"
+  valueHeader="Description"
+  rows={[
+    {
+      label: "Dark Green Square",
+      value: "A schematic map of the surrounding area displaying the railway network. The next destination can be selected here and the proposed route can be examined."
+    },
+    {
+      label: "Light Green Square",
+      value: "Controls the camera position within the schematic route display."
+    },
+    {
+      label: "Red Square",
+      value: "The main movement control panel. It displays the current train status, reasons preventing movement, train speed, and the estimated arrival time at the next station."
+    },
+    {
+      label: "Yellow Square",
+      value: "Information about the selected station and its database description. In some cases, this area also displays information about radio signals originating from the station."
+    }
+  ]}
+/>
+
+## Station Types
+
+Available stations are classified by the system into several primary types.
+
+<DataTable
+  labelHeader="Station Type"
+  valueHeader="Description"
+  rows={[
+    {
+      label: "Military",
+      value: "Military facilities belonging to the local government, classified complexes, and other sites of military significance. The train's database has limited access to government records."
+    },
+    {
+      label: "Freight",
+      value: "A freight terminal intended for replenishing the train's supplies. These stations may contain specialized docks for cargo trains."
+    },
+    {
+      label: "Emergency",
+      value: "Emergency stations are uncommon. Their purpose and condition may differ from standard stations, requiring increased caution."
+    },
+    {
+      label: "Urban",
+      value: "Stations located within urban areas. They generally contain significant amounts of resources and infrastructure."
+    },
+    {
+      label: "Unknown",
+      value: "A station whose type could not be determined from the available data. Such locations should be treated as potentially hazardous."
+    }
+  ]}
+/>
+
+Some stations feature a unique interface design. This designation is used for **regional capitals** — significantly larger and more densely populated stations with extensive infrastructure.
+
+## Climatic Regions
+
+The territory of the state is divided into several climatic regions. Each has its own environmental conditions, infection levels, and characteristic threats.
+
+<DataTable
+  labelHeader="Region"
+  valueHeader="Description"
+  rows={[
+    {
+      label: "Tundra",
+      value: "A cold northern region of the state. Low temperatures reduce mutant activity and slow their spread. The primary environmental hazards are extreme cold and snowstorms."
+    },
+    {
+      label: "Temperate",
+      value: "A region with a temperate forest climate located in the central part of the state. Higher temperatures contribute to increased mutant activity."
+    },
+    {
+      label: "Desert",
+      value: "A hot and sparsely populated region. High temperatures significantly increase mutant activity. Stations are less common, while encounters with raiders are more likely."
+    },
+    {
+      label: "Infected Region",
+      value: "An area completely overtaken by the infection. Operational freight stations are absent. Stations of this type detected by the train cannot perform standard supply functions. Signs of normal human activity are virtually nonexistent."
+    }
+  ]}
+/>
+
+> **Important:** At the current stage of the simulation, only the **Tundra** region is available. The remaining regions are under development and will be added in future domain updates.
+
+## Morphological Engine
+
+The **Morphological Engine** is the primary system protecting the internal space of **Belus-06** from the spread of the Khara mutation. The device is installed in the engineering car and serves as the sole source of the protective field covering the entire train.
+
+For more information, see the [corresponding article](../morph_engine).

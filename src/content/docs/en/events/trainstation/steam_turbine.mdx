@@ -1,0 +1,257 @@
+---
+title: Steam Turbine
+---
+
+import ImagePanel from "@/components/ImagePanel.astro"
+import DocumentHeader from "@/components/DocumentHeader.astro"
+import DataTable from '@components/DataTable.astro';
+
+# Steam Turbine
+
+<DocumentHeader
+  security="SIGMA"
+  threat="MEDIUM"
+  status="CLASSIFIED"
+/>
+
+## Steam Turbine
+
+The **Steam Turbine** is the primary power generation system aboard **Belus-06**, converting the energy of hot water vapor into the electrical power required to operate the train.
+
+The turbine consists of three sequentially connected components: the **inlet compressor, central rotor, and outlet stator**. For normal operation, all three components must be positioned in close proximity and correctly connected.
+
+The system operates on a closed steam cycle. Water is fed into the plasma heater, where it is heated and converted into hot steam. The steam then enters the turbine's inlet compressor and transfers its energy to the central rotor. At the outlet, the spent steam condenses back into the liquid system as cooled water.
+
+> **Important:** The turbine only accepts hot water vapor. Cold or insufficiently heated steam will not be accepted by the inlet compressor.
+
+### Turbine Components
+
+The Steam Turbine consists of three primary components.
+
+<DataTable
+  labelHeader="Component"
+  valueHeader="Purpose"
+  rows={[
+    {
+      label: "Inlet Compressor",
+      value: "Receives hot water vapor from the gas pipeline and directs it into the central rotor. Equipped with an inlet regulator that allows the steam intake rate to be adjusted."
+    },
+    {
+      label: "Central Rotor",
+      value: "The primary working component of the turbine. Converts the energy of the steam flow into rotation and electrical power. Current RPM, temperature, target rotation speed, and system condition are monitored here."
+    },
+    {
+      label: "Outlet Stator",
+      value: "Receives the spent flow from the rotor and returns the resulting water to the liquid system."
+    }
+  ]}
+/>
+
+The installation is controlled through a dedicated **Steam Turbine Control Console**.
+
+## Steam Preparation
+
+Before starting the turbine, a stable supply of hot water vapor must be established.
+
+This is provided by the **plasma heater**. Plasma sheets are installed inside the heater, after which the water supply and gas pipeline leading to the turbine compressor are connected.
+
+<ImagePanel
+  src="trainstation/train_heater.png"
+  alt="Plasma heater"
+  caption="Plasma heater"
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+The heater uses plasma energy to heat the incoming water. Once the required temperature is reached, the water is converted into steam and fed into the turbine's gas system.
+
+The following conditions must be met for the heater to operate:
+
+<DataTable
+  labelHeader="Condition"
+  valueHeader="Requirement"
+  rows={[
+    {
+      label: "Fuel",
+      value: "Plasma sheets must be loaded inside the heater."
+    },
+    {
+      label: "Water",
+      value: "The heater must be connected to a liquid system with an available water supply."
+    },
+    {
+      label: "Gas Connection",
+      value: "The heater's gas outlet must be connected to the Steam Turbine's inlet compressor."
+    },
+    {
+      label: "Mounting",
+      value: "The heater must be secured before activation."
+    }
+  ]}
+/>
+
+Plasma sheets are gradually consumed during operation. Long-term turbine operation therefore requires continuous monitoring of both fuel and water reserves.
+
+## Starting the Steam Turbine
+
+Before startup, verify that all three turbine components are connected and that a stable supply of hot steam is available.
+
+The installation is started through the control console. Once all required components are detected, the console provides access to the turbine's operating parameters.
+
+<ImagePanel
+  src="trainstation/turbine_room.png"
+  alt="Steam turbine compartment"
+  caption="Steam turbine engineering compartment"
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION"
+/>
+
+The standard startup procedure is as follows.
+
+<DataTable
+  labelHeader="Step"
+  valueHeader="Action"
+  rows={[
+    {
+      label: "Connect the Gas Canister",
+      value: "Connect a gas canister to the port between the heaters (orange square). If no canister is available, use the spare canister from storage (green square)."
+    },
+    {
+      label: "Activate the Heaters",
+      value: "Turn on the heaters above the turbine housing (red square) and set them to maximum temperature."
+    },
+    {
+      label: "Start the Steam Cycle",
+      value: "Switch the pump in the purple circuit and set the pressure to 250–300 kPa, depending on the required power output."
+    },
+    {
+      label: "Load the Heaters",
+      value: "Insert plasma sheets into the water heaters (orange square). Additional sheets are stored in the storage area (green square)."
+    },
+    {
+      label: "Activate the Turbine",
+      value: "Activate the turbine control console (red square) and start the installation."
+    }
+  ]}
+/>
+
+## Turbine Controls
+
+Once started, the turbine's primary parameters are monitored and adjusted through the control console.
+
+<ImagePanel
+  src="trainstation/turbine_ui.png"
+  alt="Steam turbine control console interface"
+  caption="Turbine parameter control interface"
+  reference="IMG-0001"
+  source="ARCHIVE/TRAINSTATION/UI"
+/>
+
+<DataTable
+  labelHeader="Parameter"
+  valueHeader="Description"
+  rows={[
+    {
+      label: "Inlet Regulator",
+      value: "Determines how quickly the turbine attempts to consume the available steam from the external pipeline. The regulator controls the rate of consumption rather than simply limiting the flow."
+    },
+    {
+      label: "Steam Consumption",
+      value: "Determines how much of the available steam inside the turbine is used for power generation. Higher values consume steam faster and allow for higher potential RPM."
+    },
+    {
+      label: "Target RPM",
+      value: "Determines the rotation speed the rotor attempts to reach. This does not directly control power output: the turbine will only attempt to reach the specified value when a sufficient amount of steam is available."
+    },
+    {
+      label: "Power Control",
+      value: "Allows the turbine to be switched on and off and displays the installation's current electrical output."
+    }
+  ]}
+/>
+
+For a quick startup, the following settings are recommended:
+
+* **Inlet Regulator:** 60–70%.
+* **Steam Consumption:** 0.70.
+* **Target RPM:** approximately 4500 RPM.
+
+> **Important:** The turbine cannot be shut down normally while the current rotor speed is above **500 RPM**.
+
+### Inlet Regulator
+
+The inlet compressor is equipped with a steam flow regulator.
+
+It determines how quickly the installation attempts to utilize the available steam flow. Lower values reduce steam consumption and potential power output, while higher values allow for greater flow and increased rotor speed.
+
+Excessive steam intake increases the load on the rotor and accelerates its heating.
+
+The regulator should therefore be adjusted gradually while continuously monitoring **RPM, temperature, and system condition**.
+
+### RPM Control
+
+The console allows the operator to set the **target rotor speed**.
+
+The rotor automatically attempts to reach the specified value, but actual RPM depends on the amount and temperature of incoming steam. If the steam supply is insufficient, the rotation speed will begin to decrease regardless of the configured target.
+
+Maximum values should not be used without a specific reason.
+
+Once approximately **90% of maximum RPM** is reached, additional rotor wear begins to accumulate. The further the rotor exceeds the safe operating range, the faster damage accumulates.
+
+### Temperature and Overheating
+
+The Steam Turbine must be kept within a controlled temperature range at all times.
+
+Rotor temperature depends on the temperature of the incoming steam and changes during operation. Exceeding the permitted temperature causes the installation to take damage.
+
+The console will issue a warning if overheating occurs. Continued operation under these conditions will cause damage to accumulate over time.
+
+Maximum RPM must also be monitored alongside temperature. Operating at high RPM causes additional wear even when the temperature remains within the normal range.
+
+> **Warning:** Overheating and excessive RPM can result in rotor failure. If the central rotor reaches critical damage, it is destroyed, causing the subsequent explosion of the installation.
+
+## Electrical Power Output
+
+Power generation is determined by the rotor's current rotation speed and the overall efficiency of the turbine components.
+
+More efficient components can provide greater power output under the same operating conditions.
+
+The installation's efficiency also depends on the turbine modules installed. Upgrading individual components can increase performance and alter the installation's permitted operating characteristics.
+
+During prolonged continuous operation, the turbine gradually becomes more efficient. Every **15 minutes** of uninterrupted operation increases its power output by **10%**.
+
+## Water Recovery
+
+Water is not completely lost after passing through the turbine.
+
+The outlet stator returns the recovered water to the liquid system, allowing a closed cycle to be established:
+
+**Water → Plasma Heater → Hot Steam → Steam Turbine → Cooled Water → Heater.**
+
+For full circulation, liquid pipes must be connected to the stator's outlet and linked to the heater's water supply system.
+
+The closed cycle is not completely lossless, so the water supply must be replenished periodically.
+
+## Emergency Shutdown
+
+The control console provides an **emergency dump** function.
+
+It is intended to rapidly reduce the load on the installation when normal steam regulation is no longer sufficient to safely stop the rotor from accelerating.
+
+The emergency dump should be used when temperature or RPM begins rising critically. It does not, however, repair damage that has already been sustained by the components.
+
+## Operation and Maintenance
+
+During operation, the crew should regularly monitor the turbine's condition, steam intake, rotor temperature, and current RPM.
+
+The turbine should not be operated continuously at its maximum limits in pursuit of peak power output. It is designed for sustained operation at a stable load rather than constant acceleration toward maximum RPM.
+
+If overheating or excessive RPM is detected, the load should be reduced immediately and the installation stabilized.
+
+The turbine's primary components should also be inspected periodically for damage. A damaged rotor is particularly dangerous, as continued operation may result in catastrophic failure.
+
+## Quick Reference
+
+**Hot Steam → Start Turbine → Gradually Increase RPM → Monitor Temperature and Rotor Condition → Return Water to the Circuit → Maintain Safe RPM.**
+
+Whenever overheating or uncontrolled RPM increase is detected, stabilizing the installation takes priority over maximizing power output.
