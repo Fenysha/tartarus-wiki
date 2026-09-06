@@ -45,16 +45,8 @@ export default defineConfig({
 					items: [{ autogenerate: { directory: 'docs' } }],
 				},
 				{
-					label: 'Лор',
-					items: [{ autogenerate: { directory: 'lore' } }],
-				},
-				{
 					label: 'Эвенты',
 					items: [{ autogenerate: { directory: 'events' } }],
-				},
-				{
-					label: 'Руководства',
-					items: [{ autogenerate: { directory: 'guides' } }],
 				},
 			],
 			customCss: ['./src/styles/custom.css'],
